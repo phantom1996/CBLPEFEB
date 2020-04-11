@@ -7,11 +7,12 @@ using namespace std;
 
 class Car
 {
-private:
-	int price;
+// private:
+// 	int price;
 public:
 	//char name[50];
 	char *name;
+	int price;
 	int seater;
 	char series[50];
 
@@ -102,8 +103,29 @@ void operator +=(Car B){
 }
 
 
+
+	//destructor
+
+	~Car(){
+		//destructor
+		cout<<"i am in destructor"<<endl;
+
+	}
+
+
+
 	
 };
+
+
+void print2(Car A){
+		cout<<"Name of car is  "<<A.name<<endl;
+		cout<<"Price of car is  "<<A.price<<endl;
+		cout<<"Seats  of car is  "<<A.seater<<endl;
+		cout<<"Series of car is  "<<A.series<<endl;	
+}
+
+
 
 int main()
 {
@@ -133,28 +155,29 @@ int main()
 
 	B.name[0]='T';
 
-
+	print2(A);
 	Car D(A);
-	A.print();
+	//A.print();
 	cout<<endl;
-	B.print();
+//	B.print();
 	cout<<endl;
-	C.print();
+//	C.print();
 	cout<<endl;
-	D.print();
+//	D.print();
 	cout<<endl;
 	Car E;
 	E=A;//copy assigmet operator
 //	E=D;
-	E.print();
+//	E.print();
 	A+=B;
 	cout<<endl;
-	A.print();
+//	A.print();
 //	A.price=5;
 //	A.updateprice(10000);
 //	A.print();
 
 	//B.print();
 	//C.print();
+
 	return 0;
 }
