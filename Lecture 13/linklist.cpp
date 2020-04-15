@@ -145,7 +145,7 @@ public:
 	}
 
 	node* findMid(){
-		node* fastptr=head;
+		node* fastptr=head->next;
 		node* slowptr=head;
 
 		while(fastptr!=NULL && fastptr->next!=NULL){
@@ -163,30 +163,72 @@ public:
 
 
 
-int main()
-{
-	Linklist l;
+void printmyll(node* head){
+	node* temp=head;
+	while(temp!=NULL){
+		cout<<temp->data<<"-->";
+		temp=temp->next;
+	}
+}
 
-	for(int i=1;i<=6;i++){
-		//l.Insertion_at_front(i);
-		l.Insertion_at_Tail(i);
+node* mergeLL(node* a,node* b){
+	//base case
+	if(a==NULL){
+		return b;
+	}
+	if(b==NULL){
+		return a;
 	}
 
-	node* temp=l.findMid();
-	cout<<temp->data<<endl;
-	//l.Deletion_at_tail();
-	//l.Deletion_at_front();
-	//l.Insertion_at_position(7,3);
-	l.print();
-	// cout<<endl;
+	node* c;
+
+	if(a->data<b->data){
+		c=a;
+		//recursive
+		c->next=mergeLL(a->next,b);
+	}
+	else{
+		c=b;
+		c->next=mergeLL(a,b->next);
+	}
+
+	return c;
+
+}
+
+
+int main()
+{
+	Linklist l1;
+	Linklist l2;
+
+	// for(int i=1;i<=6;i++){
+	// 	//l.Insertion_at_front(i);
+	// 	l.Insertion_at_Tail(i);
+	// }
+
+	// node* temp=l.findMid();
+	// cout<<temp->data<<endl;
+	// //l.Deletion_at_tail();
+	// //l.Deletion_at_front();
+	// //l.Insertion_at_position(7,3);
+	// l.print();
+	// // cout<<endl;
 	// cout<<l.length()<<endl;
 	// cout<<boolalpha<<l.iselementexist(3)<<endl;
 
+	l1.Insertion_at_Tail(1);
+	l1.Insertion_at_Tail(3);
+	l1.Insertion_at_Tail(5);
+	l1.Insertion_at_Tail(7);
+	l2.Insertion_at_Tail(2);
+	l2.Insertion_at_Tail(4);
+	l2.Insertion_at_Tail(6);
 
 
+node* ans=mergeLL(l1.head,l2.head);
 
-
-
+printmyll(ans);
 	
 	return 0;
 }
