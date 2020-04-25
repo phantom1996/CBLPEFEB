@@ -74,8 +74,12 @@ node* reversell(node* head){
 		curr=Mynext;
 	}
 
+
 	return prev;
 }
+
+
+
 
 
 
@@ -87,15 +91,18 @@ int main()
 	// 	l.Insertion_at_Tail(i);
 	// }
 	l.Insertion_at_Tail(1);
-	l.Insertion_at_Tail(5);
+	l.Insertion_at_Tail(2);
 	l.Insertion_at_Tail(3);
 	l.Insertion_at_Tail(4);
-	l.Insertion_at_Tail(2);
-	l.print();
-	cout<<endl;
+	l.Insertion_at_Tail(5);
+	l.Insertion_at_Tail(6);
+	//l.print();
+	//cout<<endl;
 	// node* ans=mergesort(l.head);
 	// printmyll(ans);
-	node* ans=reversell(l.head);
-	printmyll(ans);
+	//node* ans=reversell(l.head);
+	l.Reorder();
+	l.print();
+	//printmyll(ans);
 	return 0;
 }

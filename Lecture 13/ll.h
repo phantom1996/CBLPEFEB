@@ -155,14 +155,23 @@ public:
 
 		return slowptr;
 	}
-
+	void Reorder(){
+		int pos=2;
+		while(pos<=length()){
+			node* t=head;
+			while(t->next!=tail){
+				t=t->next;
+			}
+			int d=t->next->data;
+			Deletion_at_tail();
+			Insertion_at_position(d,pos);
+			pos+=2;
+		}
+	}
 
 
 
 };
-
-
-
 void printmyll(node* head){
 	node* temp=head;
 	while(temp!=NULL){
@@ -171,6 +180,7 @@ void printmyll(node* head){
 	}
 }
 
+       
 node* mergeLL(node* a,node* b){
 	//base case
 	if(a==NULL){

@@ -96,11 +96,79 @@ int Daimeter(node* root){
 	return max(op1,max(op2,op3));
 }
 
+pair<int,int> HeiDia(node* root){
+	pair<int,int>p;
+	if(root==NULL){
+		p.first=0;
+		p.second=0;
+		return p;
+	}
+	pair<int,int> left=HeiDia(root->left);
+	pair<int,int> right=HeiDia(root->right);
 
+	p.first=max(left.first,right.first) + 1;
+	p.second=max(left.first+right.first+1,max(left.second,right.second));
+	return p;
+}
+#include<queue>
+node* levelorderInput(){
+	int data;
+	cin>>data;
+	node* root=new node(data);
+	queue<node* >q;
+	q.push(root);
+
+	while(!q.empty()){
+		node* root=q.front();
+		int leftdata;
+		cin>>leftdata;
+		if(leftdata!=-1){
+			root->left=new node(leftdata);
+			q.push(root->left);
+		}
+		int rightdata;
+		cin>>rightdata;
+		if(rightdata!=-1){
+			root->right=new node(rightdata);
+			q.push(root->right);
+		}
+		q.pop();
+	}
+	return root;
+
+
+}
+
+void levelorderPrint(node* root){
+
+	queue<node*> q;
+	q.push(root);
+	q.push(NULL);
+	while(!q.empty()){
+		node* root=q.front();
+		q.pop();
+		cout<<root->data<<" ";
+		if(root->left!=NULL){
+			q.push(root->left);
+		}
+		if(root->right!=NULL){
+			q.push(root->right);
+		}
+		if(q.front()==NULL){
+			cout<<endl;
+			q.pop();
+			if(!q.empty()){
+				q.push(NULL);
+			}
+		}
+	}
+
+
+}
 
 int main()
 {
-	node* root=CreateTree();
+	node* root=levelorderInput();
 	// // preorder(root);
 	// cout<<endl;
 	// postorder(root);
@@ -109,9 +177,12 @@ int main()
 	// cout<<endl;
 	// int ans=cntnode(root);
 	// cout<<ans<<endl;
-//	int ans=height(root);
-	//cout<<ans<<endl;
-	int ans=Daimeter(root);
-	cout<<ans;
+	// int ans1=height(root);
+	// cout<<ans1<<endl;
+	// int ans=Daimeter(root);
+	// cout<<ans<<endl;
+	// pair<int,int> p=HeiDia(root);
+	// cout<<p.first<<" "<<p.second<<endl;
+	levelorderPrint(root);
 	return 0;
 }
