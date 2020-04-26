@@ -103,11 +103,32 @@ bool is_balaced(node* root){
 		return false;
 	}
 }
+node* CreateTreeUsigiopo(int* io,int* po,int s,int e,int &lastptr){
+	if(s>e){
+		return NULL;
+	}
+	node* root=new node(po[lastptr]);
+	lastptr--;
+	int index;
+	for(int i=0;i<=e;i++){
+		if(io[i]==root->data){
+			index=i;
+			break;
+		}
+	}
+	root->right=CreateTreeUsigiopo(io,po,index+1,e,lastptr);
+	root->left=CreateTreeUsigiopo(io,po,s,index-1,lastptr);
+	return root;
+}
 
 int main()
 {
-	node* root=CreateBST();
-	//inorder(root);
-	cout<<boolalpha<<is_balaced(root);
+	int io[]={1,3,4,6,7,8,10,13,14};
+	int po[]={1,4,7,6,3,13,14,10,8};
+	int lastptr=8;
+	node *root=CreateTreeUsigiopo(io,po,0,8,lastptr);
+	//node* root=CreateBST();
+	inorder(root);
+	//cout<<boolalpha<<is_balaced(root);
 	return 0;
 }
