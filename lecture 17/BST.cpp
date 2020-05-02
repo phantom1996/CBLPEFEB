@@ -121,12 +121,34 @@ node* CreateTreeUsigiopo(int* io,int* po,int s,int e,int &lastptr){
 	return root;
 }
 
+node* CreateTreefromsortedarray(int* a,int s,int e){
+	//ase case
+	if(s>e){
+		return NULL;
+	}
+
+	int mid=(s+e)/2;
+
+	node* root=new node(a[mid]);
+
+	root->left=CreateTreefromsortedarray(a,s,mid-1);
+	root->right=CreateTreefromsortedarray(a,mid+1,e);
+
+	return root;
+
+
+}
+
 int main()
 {
-	int io[]={1,3,4,6,7,8,10,13,14};
-	int po[]={1,4,7,6,3,13,14,10,8};
-	int lastptr=8;
-	node *root=CreateTreeUsigiopo(io,po,0,8,lastptr);
+	int a[]={1,2,3,4,5,6,7,8,9,10};
+
+	node* root=CreateTreefromsortedarray(a,0,9);
+
+	//int io[]={1,3,4,6,7,8,10,13,14};
+	//int po[]={1,4,7,6,3,13,14,10,8};
+	//int lastptr=8;
+	//node *root=CreateTreeUsigiopo(io,po,0,8,lastptr);
 	//node* root=CreateBST();
 	inorder(root);
 	//cout<<boolalpha<<is_balaced(root);
