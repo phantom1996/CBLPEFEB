@@ -13,15 +13,18 @@ int main()
 	menu.insert("Noodles",75);
 	menu.insert("Coke",60);
 
-	//.print();
-	string key="Pizze";
-	int ans=menu.search(key);
-	if(ans!=-1){
-		cout<<"The Price of "<<key<<" is "<<ans;
-	}
-	else{
-		cout<<"Item not found";
-	}
+	//menu.print();
+	// string key="Pizze";
+	// int ans=menu.search(key);
+	// if(ans!=-1){
+	// 	cout<<"The Price of "<<key<<" is "<<ans;
+	// }
+	// else{
+	// 	cout<<"Item not found";
+	// }
+
+	cout<<menu["Pizza"];
+
 	
 	return 0;
 }

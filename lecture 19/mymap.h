@@ -25,6 +25,7 @@ public:
 		if(next!=NULL){
 			delete next;
 		}
+		cout<<"Deleting "<<key<<" "<<value<<endl;
 	}
 };
 
@@ -49,6 +50,38 @@ class hashmap{
 	}
 	void Rehash(){
 		//continue
+		//storage of old table
+		node** oldtable=table;
+		int oldtablesize=table_size;
+
+		//creatinng ew big size table tablesize=2*tablesize
+		table_size=2*table_size;
+		table=new node*[table_size];
+		for(int i=0;i<table_size;i++){
+			table[i]=NULL;
+		}
+
+		current_size=0;//beacuse new table currently has no elemet
+		
+		//copy
+		for(int i=0;i<oldtablesize;i++){
+			node* temp=oldtable[i];
+			while(temp!=NULL){
+				insert(temp->key,temp->value);
+				temp=temp->next;
+			}
+			if(oldtable[i]!=NULL){
+				delete oldtable[i];
+			}
+		}
+
+
+		delete []oldtable;
+
+
+
+
+
 	}
 
 public:
@@ -71,10 +104,11 @@ public:
 
 		n->next=table[idx];
 		table[idx]=n;
+		current_size++;
 
 		float lf=current_size/(1.0*table_size);
-		if(lf>0.7){
-			Rehash()
+		if(lf>=0.7){
+			Rehash();
 		}
 	}	
 
@@ -109,7 +143,11 @@ public:
 			cout<<endl;
 		}
 	}
-
+	
+	int operator [](string key){
+		int val= search(key);
+		return val;
+	}
 
 
 };
